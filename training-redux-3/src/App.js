@@ -55,10 +55,10 @@ const mapDispatchToProps = (dispatch,props) => {
 
 
 => Tương tự với việc truyền hàm hay state từ components cha xuống con, ví dụ:
-componetns cho có hàm xử lí xóa: deleteItem = id => {
+componetns cha có hàm xử lí xóa: deleteItem = id => {
   //code
 }
-, lúc này ta cần truyền hàm nay hoặc state xuống con, ví dụ components con là Item thì để truyền ta cần làm:
+, lúc này ta cần truyền hàm này hoặc state xuống con, ví dụ components con tên là Item thì để truyền ta cần làm:
 <Item deleteItem={id=>this.deleteItem(id)}/>
 nhưng nếu cầ truyền nhiều thì sẽ rất rối và khó quản lí nên mới sinh ra redux ^^  
 */
