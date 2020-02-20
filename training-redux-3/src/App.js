@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as actions from "./actions/index";
 import { createStore } from "redux";
-// kết nối với store 
+// kết nối với store
 import { connect } from "react-redux";
 import myReducer from "./reducers/index";
 class App extends Component {
@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch,props) => {
     //code
   }
 }
-=> connect store : export default connect(mapStateToProps, mapDispatchToProps)(App) 
+=> connect store : export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 
 
@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch,props) => {
   return {
     deleteItem: id => {
       dispatch(deleteItem(id))
-      //dispatch(actions)  là actions import
+      //dispatch(actions)   (cần phải import actions vào components để nhận hàm xử lí hành động)
     }
   }
 } ( => tương tự với mapStateToProps khac là muốn lấy state thì phải lấy thông qua reducers đã được combine )
@@ -58,9 +58,17 @@ const mapDispatchToProps = (dispatch,props) => {
 componetns cha có hàm xử lí xóa: deleteItem = id => {
   //code
 }
-, lúc này ta cần truyền hàm này hoặc state xuống con, ví dụ components con tên là Item thì để truyền ta cần làm:
+, lúc này ta cần truyền hàm này hoặc state xuống components con để nó có thể nhận thông qua props, ví dụ components con tên là Item thì để truyền ta cần import
+components con Item vào components cha là App đang có hàm xử lí xóa phần tử và truyền hàm đó vào components con để nó có
+thể nhận dc props (this.props.deleteItem(id) xóa phần tử, ta truyền như sau làm:
 <Item deleteItem={id=>this.deleteItem(id)}/>
-nhưng nếu cầ truyền nhiều thì sẽ rất rối và khó quản lí nên mới sinh ra redux ^^  
+nhưng nếu ta truyền nhiều tầng components mới tới components đích thì sẽ rất rối và khó quản lí nên mới sinh ra redux ^^
+
+
+Vì thế sau khi hoàn thành các bước với Redux thì component con <Item/> nhận dc props là this.props.deleteItem(id) khi ta connect lên store và dispatch
+actions deleteItem thay vì phải truyền từ components cha là App vào => giúp cho dễ quản lí luồng dữ liệu hơn
+
+
 */
 //kết nối components lên store (nếu cần tới các props là state và actions)
 export default App;
